@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const URI_DB = process.env.URI_DB;
