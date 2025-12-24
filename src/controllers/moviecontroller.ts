@@ -1,7 +1,6 @@
-// src/controllers/movie.controller.ts
 import { Request, Response } from "express";
 import * as movieService from "../services/movieservice";
-
+import { CreateMovieDto } from "../schemas/movieschema";
 export const getMovies = async (req: Request, res: Response) => {
   try {
     const { title, genre, ratingMin, ratingMax, year } = req.query;
@@ -22,3 +21,13 @@ export const getMovies = async (req: Request, res: Response) => {
   }
 };
 
+export const createMovie = async (req: Request, res: Response) => {
+  try {
+    const data = req.body as CreateMovieDto;
+    const movie = await movieService.createMovie(data);
+    res.status(201).json(movie);
+  } catch (error) {
+    console.error("Error al crear película:", error);
+    res.status(500).json({ message: "Error al crear película" });
+  }
+};

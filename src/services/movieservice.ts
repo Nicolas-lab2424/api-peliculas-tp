@@ -1,5 +1,11 @@
-
 import { Movie, IMovie } from "../models/moviemodel";
+import { CreateMovieDto } from "../schemas/movieschema";
+
+
+export const createMovie = async (data: CreateMovieDto): Promise<IMovie> => {
+  const movie = await Movie.create(data);
+  return movie;
+};
 
 interface QueryFilters {
   title?: string;
