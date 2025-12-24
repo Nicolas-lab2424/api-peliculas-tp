@@ -1,6 +1,7 @@
 import { Movie, IMovie } from "../models/moviemodel";
 import { CreateMovieDto } from "../schemas/movieschema";
-
+import mongoose from "mongoose";
+import { UpdateMovieDto } from "../schemas/movieUpdateschema";
 
 export const createMovie = async (data: CreateMovieDto): Promise<IMovie> => {
   const movie = await Movie.create(data);
@@ -40,4 +41,19 @@ export const getAllMovies = async (filters: QueryFilters): Promise<IMovie[]> => 
 
   const movies = await Movie.find(query);
   return movies;
+};
+
+export const getMovieById = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) return null;
+  return Movie.findById(id);
+};
+
+export const updateMovieById = async (id: string, data: UpdateMovieDto) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) return null;
+  return Movie.findByIdAndUpdate(id, data, { new: true });
+};
+
+export const deleteMovieById = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) return null;
+  return Movie.findByIdAndDelete(id);
 };
