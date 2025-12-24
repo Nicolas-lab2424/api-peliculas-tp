@@ -1,46 +1,105 @@
-# API Películas (TypeScript + Express + MongoDB)
+🎬 API REST de Películas (TypeScript · Express · MongoDB)
 
-## Requisitos
-- Node.js
-- MongoDB Atlas (o Mongo local)
+Este proyecto consiste en una API REST segura y completamente operativa, desarrollada con TypeScript, Node.js y Express.
+Permite consultar información de películas de forma pública y administrar el catálogo mediante endpoints protegidos que requieren autenticación.
 
-## Instalación
-```bash
+La API está deployada en Render y lista para su consumo:
+
+➡️ URL base de producción:
+https://api-peliculas-tp.onrender.com/
+
+
+⚙️ Tecnologías Utilizadas
+
+Node.js & Express
+Entorno de ejecución y framework para la construcción de la API REST.
+
+TypeScript
+Lenguaje con tipado estático que mejora la mantenibilidad y calidad del código.
+
+MongoDB & Mongoose
+Base de datos NoSQL junto con una librería ODM para el manejo de los datos.
+
+Zod
+Librería para validación de esquemas y control de datos de entrada (emails, ratings y campos obligatorios).
+
+JWT (JSON Web Tokens)
+Sistema de autenticación para proteger rutas sensibles.
+
+bcryptjs
+Utilizado para el cifrado seguro de contraseñas.
+
+express-rate-limit
+Middleware para limitar solicitudes en rutas críticas y prevenir ataques de fuerza bruta.
+
+🛠️ Requisitos y Ejecución Local
+
+Para correr el proyecto en tu entorno local necesitás:
+
+Node.js (versión LTS recomendada)
+
+npm (incluido con Node.js)
+
+MongoDB Atlas o una instancia local de MongoDB
+
+📦 Instalación del Proyecto
+
+Clonar el repositorio:
+
+git clone <URL_DE_TU_REPOSITORIO>
+
+
+Ingresar a la carpeta del proyecto:
+
+cd nombre-del-proyecto
+
+
+Instalar dependencias:
+
 npm install
-Variables de entorno:
-Crear un archivo .env basado en .env.example.
 
-Scripts:
+🔐 Variables de Entorno
 
-npm run dev -> desarrollo (TypeScript)
+Crear un archivo .env en la raíz del proyecto y configurar las siguientes variables:
 
-npm run build -> compilar a JavaScript
+# URI de conexión a MongoDB Atlas
+URI_DB="mongodb+srv://<user>:<password>@<cluster>/<DB_NAME>?retryWrites=true&w=majority"
 
-npm start -> producción (JavaScript compilado)
+# Clave secreta para JWT
+JWT_SECRET="TuClaveSecretaMuyLargaYSeguraAquí"
 
-Endpoints
-Health:
+# Puerto del servidor
+PORT=3000
 
-GET /health
+▶️ Ejecutar el Servidor
 
-Auth:
+Con el archivo .env configurado, iniciar el servidor en modo desarrollo:
 
-POST /auth/register
+npm run dev
 
-POST /auth/login
 
-Movies:
+El servidor se ejecutará con recarga automática ante cambios.
 
-GET /movies (soporta query params: title, genre, ratingMin, ratingMax, year)
+🚀 Endpoints Disponibles
+📽️ Películas (/movies)
+Método	Ruta	Descripción	Seguridad
+GET	/movies	Obtiene todas las películas	Público
+GET	/movies/:id	Obtiene una película por ID	Público
+POST	/movies	Crea una nueva película	Requiere JWT
+PATCH	/movies/:id	Actualiza una película existente	Requiere JWT
+DELETE	/movies/:id	Elimina una película	Requiere JWT
+🔑 Autenticación
 
-GET /movies/:id
+Para acceder a las rutas protegidas (POST, PATCH, DELETE), es obligatorio enviar el token JWT en el header de la petición:
 
-POST /movies (requiere token)
+Authorization: Bearer <TU_TOKEN_JWT_AQUÍ>
 
-PATCH /movies/:id (requiere token)
+Puerto de ejecución
+PORT=3000
 
-DELETE /movies/:id (requiere token)
+Ejecutar el ServidorUna vez configurado el .env, puedes iniciar la aplicación en modo desarrollo:# Ejecuta el servidor usando ts-node-dev (con reinicio automático) npm run dev
+🚀 Endpoints de la APILa API maneja dos rutas principales:
 
-Autorización
+Gestión de Películas (/movies)MétodoRutaDescripciónSeguridad GET /movies/ Obtiene el listado de todas las películas GET /movies/:id Obtiene una película por su ID. POST /movies/ Crea una nueva película.Requiere JWT PATCH /movies/:id Actualiza parcial o totalmente una película por su ID. Requiere JWT DELETE /movies/:id Elimina una película por su ID.Requiere JWT
 
-Para los endpoints protegidos, enviar el header: Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTRjNGE1YjRiMzE3YzQ3NjEwMDQxYTciLCJlbWFpbCI6InRlc3RAbWFpbC5jb20iLCJpYXQiOjE3NjY2MDk2OTksImV4cCI6MTc2NzIxNDQ5OX0.VmE80RmcFKt9dkyCOkSnOAUFVex-i9Bx8D1KBx3nW6c"
+Uso del Token (Para rutas seguras):Debes incluir el Header Authorization en las peticiones POST, PATCH y DELETE.Authorization: Bearer <TU_TOKEN_JWT_AQUÍ>
