@@ -1,6 +1,7 @@
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { validateBody } from "../middlewares/validatemiddleware";
+
 import { loginSchema, registerSchema } from "../schemas/authschema";
 import * as authController from "../controllers/authController";
 

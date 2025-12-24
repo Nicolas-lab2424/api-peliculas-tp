@@ -20,9 +20,10 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", message: "API de películas funcionando 🚀" });
 });
 
-app.use(notFound);
-app.use(errorHandler);
+
 app.use("/movies", movieRouter);
 app.use("/auth", authRouter);
+app.use(notFound);
+app.use(errorHandler);
 export default app;
 

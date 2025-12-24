@@ -40,3 +40,7 @@ POST /movies (requiere token)
 PATCH /movies/:id (requiere token)
 
 DELETE /movies/:id (requiere token)
+
+Autorización
+
+Para los endpoints protegidos, enviar el header: Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTRjNGE1YjRiMzE3YzQ3NjEwMDQxYTciLCJlbWFpbCI6InRlc3RAbWFpbC5jb20iLCJpYXQiOjE3NjY2MDk2OTksImV4cCI6MTc2NzIxNDQ5OX0.VmE80RmcFKt9dkyCOkSnOAUFVex-i9Bx8D1KBx3nW6c"
