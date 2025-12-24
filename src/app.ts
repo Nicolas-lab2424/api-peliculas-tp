@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import movieRouter from "./routes/movieroutes";
+import authRouter from "./routes/authRoutes";
 
 const app = express();
 
@@ -21,6 +22,6 @@ app.get("/health", (_req, res) => {
 
 
 app.use("/movies", movieRouter);
-
+app.use("/auth", authRouter);
 export default app;
 

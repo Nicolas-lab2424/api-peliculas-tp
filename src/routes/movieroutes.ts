@@ -6,7 +6,7 @@ import {
   updateMovie,
   deleteMovie,
 } from "../controllers/moviecontroller";
-import { validateBody } from "../middlewares/validateMiddleware";
+import { validateBody } from "../middlewares/validatemiddleware";
 import { createMovieSchema } from "../schemas/movieschema";
 import { updateMovieSchema } from "../schemas/movieUpdateschema";
 
