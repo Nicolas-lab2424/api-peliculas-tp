@@ -1,0 +1,42 @@
+# API Películas (TypeScript + Express + MongoDB)
+
+## Requisitos
+- Node.js
+- MongoDB Atlas (o Mongo local)
+
+## Instalación
+```bash
+npm install
+Variables de entorno:
+Crear un archivo .env basado en .env.example.
+
+Scripts:
+
+npm run dev -> desarrollo (TypeScript)
+
+npm run build -> compilar a JavaScript
+
+npm start -> producción (JavaScript compilado)
+
+Endpoints
+Health:
+
+GET /health
+
+Auth:
+
+POST /auth/register
+
+POST /auth/login
+
+Movies:
+
+GET /movies (soporta query params: title, genre, ratingMin, ratingMax, year)
+
+GET /movies/:id
+
+POST /movies (requiere token)
+
+PATCH /movies/:id (requiere token)
+
+DELETE /movies/:id (requiere token)
