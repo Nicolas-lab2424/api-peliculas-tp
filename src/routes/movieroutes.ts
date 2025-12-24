@@ -9,14 +9,17 @@ import {
 import { validateBody } from "../middlewares/validatemiddleware";
 import { createMovieSchema } from "../schemas/movieschema";
 import { updateMovieSchema } from "../schemas/movieUpdateschema";
+import { authMiddleware } from "../middlewares/authMiddleware";
+
 
 const router = Router();
 
 router.get("/", getMovies);
-router.post("/", validateBody(createMovieSchema), createMovie);
-
 router.get("/:id", getMovie);
-router.patch("/:id", validateBody(updateMovieSchema), updateMovie);
-router.delete("/:id", deleteMovie);
+
+router.post("/", authMiddleware, validateBody(createMovieSchema), createMovie);
+router.patch("/:id", authMiddleware, validateBody(updateMovieSchema), updateMovie);
+router.delete("/:id", authMiddleware, deleteMovie);
+
 
 export default router;
